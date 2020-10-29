@@ -1,10 +1,15 @@
 package selenium.tasks;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class Task1 {
     WebDriver driver;
@@ -27,12 +32,23 @@ public class Task1 {
     public void errorOnText() {
 //        TODO
 //        enter a text instead of a number, check that correct error is seen
+
+        driver.findElement(By.id("numb")).sendKeys( "babe");
+        driver.findElement(By.className("w3-margin")).click();
+
+        String text = "Please enter a number";
+       String textDisp = driver.findElement(By.className("error")).getAttribute("Value");
+        assertEquals( "Please enter a number", textDisp);
+
     }
 
     @Test
     public void errorOnNumberTooSmall() {
 //        TODO
-//        enter number which is too small (below 50), check that correct error is seen
+         driver.findElement(By.id("numb")).sendKeys( "45");
+         driver.findElement(By.className("w3-margin")).click();
+
+//       enter number which is too small (below 50), check that correct error is seen
     }
 
     @Test
